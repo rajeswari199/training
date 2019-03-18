@@ -1,0 +1,10 @@
+<div>
+    <button (click)="setIntersection(); showDifference = false">Intersection</button>
+    <button (click)="setUnion(); showDifference = false">Union</button>
+    <button (click)="showDifference = true">Difference</button>
+    <div *ngIf="showDifference">
+        <button (click)="setDifference('a-b')">(A - B)</button>
+        <button (click)="setDifference('b-a')">(B - A)</button>
+    </div>
+    <div *ngIf="!_.isEmpty(result)">{{result}}</div>
+</div>
