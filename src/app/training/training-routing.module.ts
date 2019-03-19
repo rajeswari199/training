@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ClosureComponent } from './closure/closure.component';
 import { TrainingComponent } from './training.component';
 
 const routes: Routes = [
@@ -16,6 +15,10 @@ const routes: Routes = [
             {
                 path: 'set',
                 loadChildren: './set/set.module#SetModule',
+            },
+            {
+                path: 'steps',
+                loadChildren: './steps-problem/steps.module#StepsModule',
             },
         ]
     },
