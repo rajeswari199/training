@@ -1,7 +1,8 @@
 <div>Steps<input type="number" name="steps" [(ngModel)]="steps"></div>
 <div>Least Skip<input type="number" [(ngModel)]="leastSkip"></div>
 <div>Highest Skip<input type="number" name="steps2" [(ngModel)]="highestSkip"></div>
-<div><button (click)="calculate()">calculate</button></div>
-<div><button (click)="calculateArray()">calculate</button></div>
-<div>{{posibilities}}</div>
+<div><button (click)="calculate()">calculate For Pair Of Initial Steps</button></div>
+<div><button (click)="calculateArray()">calculate For Array Of Initial Steps</button></div>
+<div><button (click)="calculateRecursive()">Recursive Method</button></div>
+<div *ngIf="!_.isUndefined(possibilities)">There are {{possibilities}} possibilities to reach {{steps}}th step</div>
 
