@@ -4,6 +4,5 @@
 <div><button (click)="calculate()">calculate For Pair Of Initial Steps</button></div>
 <div><button (click)="calculateArray()">calculate For Array Of Initial Steps</button></div>
 <div><button (click)="calculateRecursive()">Recursive Method</button></div>
-
-<div>There are {{posibilities}} possibilities to reach {{steps}}th step</div>
+<div *ngIf="!_.isUndefined(possibilities)">There are {{possibilities}} possibilities to reach {{steps}}th step</div>
 

@@ -12,7 +12,7 @@ export class StepsComponent {
     highestSkip: number;
     result: Array<number>;
     skipArray: Array<number>;
-    posibilities: number;
+    possibilities: number;
 
     calculate() {
         console.log(this.leastSkip, this.highestSkip, this.steps);
@@ -26,10 +26,10 @@ export class StepsComponent {
                         : step > this.leastSkip
                             ? (this.result[step - this.leastSkip]) : 0;
         });
-        this.posibilities = _.reduce(this.result, (add, posibility) =>
+        this.possibilities = _.reduce(this.result, (add, posibility) =>
             add + posibility);
         console.log(this.result);
-        console.log(this.posibilities);
+        console.log(this.possibilities);
     }
 
     calculateArray() {
@@ -46,34 +46,30 @@ export class StepsComponent {
                         : this.result[step] = this.result[step];
             });
         });
-        this.posibilities = _.reduce(this.result, (add, posibility) =>
+        this.possibilities = _.reduce(this.result, (add, posibility) =>
             add + posibility);
-        console.log(this.result, this.posibilities);
+        console.log(this.result, this.possibilities);
     }
 
     calculateRecursive() {
         this.result = _.fill(Array(this.steps + 1), 0);
         this.result[this.leastSkip] = 1;
         this.result[this.highestSkip] = 1;
-        console.log(this.result);
-        this.posibilities = this.possibility(this.leastSkip);
+        this.possibilities = this.possibility(this.leastSkip, 0);
     }
 
-    possibility(step) {
+    possibility(step, possibilities) {
+        if ((step - this.highestSkip) > 0) {
+            this.result[step] += this.result[step - this.highestSkip];
+        }
         if ((step - this.leastSkip) > 0) {
             this.result[step] += this.result[step - this.leastSkip];
-            if ((step - this.highestSkip) > 0) {
-                this.result[step] += this.result[step - this.highestSkip];
-            }
-            if (step < this.steps) {
-                console.log(this.result);
-                return this.possibility(step + 1);
-            } else {
-                return _.reduce(this.result, (add, posibility) =>
-                    add + posibility);
-            }
+        }
+        if (step > this.steps) {
+            return possibilities;
+
         } else {
-            return this.possibility(step + 1);
+            return this.possibility(step + 1, possibilities += this.result[step]);
         }
     }
 }
