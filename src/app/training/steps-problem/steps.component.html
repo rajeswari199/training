@@ -3,6 +3,7 @@
 <div>Highest Skip<input type="number" name="steps2" [(ngModel)]="highestSkip"></div>
 <div><button (click)="calculate()">calculate For Pair Of Initial Steps</button></div>
 <div><button (click)="calculateArray()">calculate For Array Of Initial Steps</button></div>
-<div><button (click)="calculateRecursive()">Recursive Method</button></div>
-<div *ngIf="!_.isUndefined(possibilities)">There are {{possibilities}} possibilities to reach {{steps}}th step</div>
+<div><button (click)="calculateRecursive(false)">Recursive Method For nth Step</button></div>
+<div><button (click)="calculateRecursive(true)">Recursive Method For n Steps</button></div>
+<div *ngIf="!_.isUndefined(possibilities)">There are {{possibilities}} possibilities to reach {{steps}} {{message}}</div>
 

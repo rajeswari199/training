@@ -13,11 +13,12 @@ export class StepsComponent {
     result: Array<number>;
     skipArray: Array<number>;
     possibilities: number;
+    message: string;
 
     calculate() {
         console.log(this.leastSkip, this.highestSkip, this.steps);
         this.result = _.fill(Array(this.steps + 1), 0);
-        this.result.forEach((posibility, step) => {
+        this.result.forEach((possibility, step) => {
             this.result[step] = step === this.leastSkip ? 1
                 : step > this.highestSkip
                     ? (this.result[step - this.highestSkip] + this.result[step - this.leastSkip])
@@ -26,8 +27,8 @@ export class StepsComponent {
                         : step > this.leastSkip
                             ? (this.result[step - this.leastSkip]) : 0;
         });
-        this.possibilities = _.reduce(this.result, (add, posibility) =>
-            add + posibility);
+        this.possibilities = _.reduce(this.result, (add, possibility) =>
+            add + possibility);
         console.log(this.result);
         console.log(this.possibilities);
     }
@@ -46,19 +47,36 @@ export class StepsComponent {
                         : this.result[step] = this.result[step];
             });
         });
-        this.possibilities = _.reduce(this.result, (add, posibility) =>
-            add + posibility);
+        this.possibilities = _.reduce(this.result, (add, possibility) =>
+            add + possibility);
         console.log(this.result, this.possibilities);
     }
-
-    calculateRecursive() {
+    calculateRecursive(nsteps) {
         this.result = _.fill(Array(this.steps + 1), 0);
         this.result[this.leastSkip] = 1;
         this.result[this.highestSkip] = 1;
-        this.possibilities = this.possibility(this.leastSkip, 0);
+        console.log(this.result);
+        this.possibilities = !nsteps ? this.possibility(this.leastSkip) : this.Totalpossibilites(this.leastSkip, 0);
+        this.message = !nsteps ? `th step` : `steps`;
     }
 
-    possibility(step, possibilities) {
+    possibility(step) {
+        if ((step - this.leastSkip) > 0) {
+            this.result[step] += this.result[step - this.leastSkip];
+            if ((step - this.highestSkip) > 0) {
+                this.result[step] += this.result[step - this.highestSkip];
+            }
+            if (step < this.steps) {
+                return this.possibility(step + 1);
+            } else {
+                return this.result[this.steps];
+            }
+        } else {
+            return this.possibility(step + 1);
+        }
+    }
+
+    Totalpossibilites(step, possibilities) {
         if ((step - this.highestSkip) > 0) {
             this.result[step] += this.result[step - this.highestSkip];
         }
@@ -69,7 +87,7 @@ export class StepsComponent {
             return possibilities;
 
         } else {
-            return this.possibility(step + 1, possibilities += this.result[step]);
+            return this.Totalpossibilites(step + 1, possibilities += this.result[step]);
         }
     }
 }
