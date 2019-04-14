@@ -1,0 +1,17 @@
+<div>PLAYER : {{counter}}</div>
+<div *ngIf="win && (counter % 2)">{{(counter % 2)}} win</div>
+<div *ngIf="win && !(counter % 2)">{{(counter % 2)+2}} win</div>
+<span>
+  <button (click)="a = coinInserted(a,1)">1</button>&nbsp;&nbsp;
+  <button (click)="b = coinInserted(b,2)">2</button>&nbsp;&nbsp;
+  <button (click)="c = coinInserted(c,3)">3</button>&nbsp;&nbsp;
+  <button (click)="d = coinInserted(d,4)">4</button>&nbsp;&nbsp;
+  <button (click)="e = coinInserted(e,5)">5</button>&nbsp;&nbsp;
+  <button (click)="f = coinInserted(f,6)">6</button>&nbsp;&nbsp;&nbsp;
+  <button (click)="g = coinInserted(g,7)">7</button>&nbsp;&nbsp;
+</span>
+<div *ngFor="let i of [6,5,4,3,2,1]">
+  <span *ngFor="let j of [1,2,3,4,5,6,7]">
+    <input size="2" [(ngModel)]="button[j][i]" type="text" name="button{{i}}{{j}}"/>
+  </span>
+</div>
