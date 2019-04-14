@@ -20,6 +20,10 @@ const routes: Routes = [
                 path: 'steps',
                 loadChildren: './steps-problem/steps.module#StepsModule',
             },
+            {
+                path: 'four-connect',
+                loadChildren: './four-connect/four-connect.module#FourConnectModule',
+            },
         ]
     },
 ];
