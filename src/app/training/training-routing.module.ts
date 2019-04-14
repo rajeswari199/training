@@ -24,6 +24,10 @@ const routes: Routes = [
                 path: 'four-connect',
                 loadChildren: './four-connect/four-connect.module#FourConnectModule',
             },
+            {
+                path: 'flames',
+                loadChildren: './flames/flames.module#FlamesModule'
+            },
         ]
     },
 ];
