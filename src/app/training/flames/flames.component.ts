@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { remove, toArray, without, forEach, includes, indexOf } from 'lodash';
-import { splitClasses } from '@angular/compiler';
+import { isUndefined, toArray, without, forEach, includes, indexOf } from 'lodash';
 
 @Component({
   selector: 'app-flames',
@@ -9,12 +8,13 @@ import { splitClasses } from '@angular/compiler';
 })
 export class FlamesComponent implements OnInit {
 
-  flamesArray = ['f', 'l', 'a', 'm', 'e', 's'];
-  flamesArray1 = this.flamesArray;
+  flamesArray: Array<string>;
   name1: any;
   name2: any;
   count = 0;
   start = 0;
+  win: string;
+  isUndefined = isUndefined;
   constructor() { }
 
   ngOnInit() {
@@ -23,11 +23,11 @@ export class FlamesComponent implements OnInit {
 
 
   setArray() {
-    if (this.flamesArray1.length > 1) {
-      const array = this.flamesArray1;
-      this.flamesArray1 = [];
+    if (this.flamesArray.length > 1) {
+      const array = this.flamesArray;
+      this.flamesArray = [];
       for (let i = this.start; i < array.length;) {
-        this.flamesArray1.push(array[i]);
+        this.flamesArray.push(array[i]);
         if (this.start === 0) {
           i++;
         } else {
@@ -38,14 +38,35 @@ export class FlamesComponent implements OnInit {
   }
 
   flames() {
-    this.flamesArray1 = this.flamesArray;
+    this.flamesArray = ['f', 'l', 'a', 'm', 'e', 's'];
+    this.win = '';
     this.getCount();
     for (let i = 0; i < 5; i++) {
       this.setArray();
       this.strike();
     }
-    if (this.flamesArray1.length === 1) {
-      console.log(this.flamesArray1);
+    if (this.flamesArray.length === 1) {
+      this.win = this.flamesArray[0];
+      switch (this.win) {
+        case 'f':
+        this.win = 'FRIENDS';
+        break;
+        case 'l':
+        this.win = 'LOVE';
+        break;
+        case 'a':
+        this.win = 'AFFECTION';
+        break;
+        case 'm':
+        this.win = 'MARRIAGE';
+        break;
+        case 'e':
+        this.win = 'ENEMY';
+        break;
+        case 's':
+        this.win = 'SISTER';
+        break;
+      }
     }
   }
 
@@ -64,8 +85,8 @@ export class FlamesComponent implements OnInit {
   }
 
   strike() {
-    const index = this.count % this.flamesArray1.length === 0 ? this.flamesArray1.length - 1 : (this.count % this.flamesArray1.length) - 1;
-    this.start = index === (this.flamesArray1.length - 1) ? 0 : (index % this.flamesArray1.length);
-    this.flamesArray1.splice(index, 1);
+    const index = this.count % this.flamesArray.length === 0 ? this.flamesArray.length - 1 : (this.count % this.flamesArray.length) - 1;
+    this.start = index === (this.flamesArray.length - 1) ? 0 : (index % this.flamesArray.length);
+    this.flamesArray.splice(index, 1);
   }
 }
