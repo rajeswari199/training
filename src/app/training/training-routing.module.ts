@@ -28,6 +28,10 @@ const routes: Routes = [
                 path: 'flames',
                 loadChildren: './flames/flames.module#FlamesModule'
             },
+            {
+                path: 'power-set',
+                loadChildren: './power-set/power-set.module#PowerSetModule'
+            },
         ]
     },
 ];

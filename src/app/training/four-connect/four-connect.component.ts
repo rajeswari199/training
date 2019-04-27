@@ -72,14 +72,16 @@ export class FourConnectComponent implements OnInit {
         && _.uniq(check1).sort().length > 3) {
         if (!isDiagonal) {
           this.win = true;
+          console.log('i',array, checkArray, isDiagonal);
+          return;
         } else {
-          this.checkj(checkArray);
+          this.checkj(checkArray,array, true);
         }
       }
     });
   }
 
-  checkj(checkArray) {
+  checkj(checkArray,checking?, isDiagonal?) {
     let jArray = [];
     let check1 = [];
     _.forEach(this.constArray, (array) => {
@@ -93,6 +95,8 @@ export class FourConnectComponent implements OnInit {
         && (_.findIndex(this.constArray, _.matches(_.uniq(check1).sort())) > -1)
         && _.uniq(check1).sort().length > 3) {
         this.win = true;
+        console.log('j', array, checkArray,checking, isDiagonal);
+        return;
       }
     });
   }
